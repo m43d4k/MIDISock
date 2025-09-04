@@ -1,0 +1,24 @@
+# MIDISock — config.yaml (read-only)
+# Matching is case-insensitive and applied after Unicode NFKC normalization.
+# Port auto-detection is disabled: settings must resolve to EXACTLY ONE output port,
+# otherwise the app exits with an error and lists available ports.
+
+midi:
+  device:
+    # Optional: filter by device/driver name (vendor, virtual MIDI, etc.).
+    # Use ONE of the following (leave both empty if not needed):
+    # - name  : substring match
+    # - regex : Python regex
+    name: "IAC_Driver"        # e.g., IAC_Driver / loopMIDI
+    # regex: ""     # e.g., (?i)iac|loopmidi
+
+  port:
+    # Required: together with device.*, must identify EXACTLY ONE MIDI OUT port.
+    # Use ONE of the following:
+    # - name  : substring match (copy the exact displayed name for the safest setup)
+    # - regex : Python regex (good for multilingual/renamed ports)
+    name: "Bus1"        # e.g., Bus2  (copy/paste from your system)
+    # regex: ""     # e.g., (?<!\d)0*2(?!\d)   ← matches “2” as a standalone number (Bus2, バス２, Port 02, etc.)
+
+  # MIDI channel to send on (1–16). Out-of-range values are clamped to 1.
+  channel: 1
